@@ -22,7 +22,6 @@ public class Application {
 		repo.save(vehicle1);
 
 		repo.getAll();
-
 	}
 
 }
