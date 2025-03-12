@@ -13,26 +13,24 @@ import org.springframework.stereotype.Repository;
 public class VehicleRepo {
 
     // spring framework provides us with a JdbcTemplate, which makes it really easy to connect to a DB using jdbc. It has all the boilercode.
-    private JdbcTemplate jdbcTemplate;
+    private JdbcTemplate template;
 
-    @Autowired
-    public void setTemplate(JdbcTemplate jdbcTemplate){
-        this.jdbcTemplate = jdbcTemplate;
+    public JdbcTemplate getTemplate() {
+        return template;
     }
     
-    public JdbcTemplate getTemplate(){
-        return jdbcTemplate;
+    @Autowired
+    public void setTemplate(JdbcTemplate template) {
+        this.template = template;
     }
-
-    public VehicleRepo(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-
+     
     public void save(Vehicle vehicle){
-        // template object is from JdbcTemplate package provided by spring.
-        String query = "insert into vehicle (id, name, type) values (?, ?, ?)";
+        //template object is from JdbcTemplate package provided by spring.
+        String query = "insert into vehicle (id, vehicle_name, vehicle_type) values (?, ?, ?)"; 
         //similar to executeUpdate when using standard jdbc
-        jdbcTemplate.update(query, vehicle.getId(), vehicle.getName(), vehicle.getType());
+        int rows = template.update(query, vehicle.getId(), vehicle.getName(), vehicle.getType());
+    
+        System.out.println(rows + "row(s) affected");
     }
 
     public List<Vehicle> getAll(){ 
