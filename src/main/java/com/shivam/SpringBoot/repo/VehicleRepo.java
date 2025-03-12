@@ -40,25 +40,36 @@ public class VehicleRepo {
         String query = "select * from vehicle";
 
         // helps to work with result set from DB one row at a time, instead of a big chunk of data
-        RowMapper<Vehicle> rowMapper = new RowMapper<Vehicle>() {
-            @Override
-            public Vehicle mapRow(ResultSet rs, int rowNum) throws SQLException{
+        // RowMapper<Vehicle> rowMapper = new RowMapper<Vehicle>() {
+        //     @Override
+        //     public Vehicle mapRow(ResultSet rs, int rowNum) throws SQLException{
                 
-                Vehicle vehicle = new Vehicle();
+        //         Vehicle vehicle = new Vehicle();
 
+        //         vehicle.setId(rs.getInt(1)); // getInt takes columnIndex as paramter.
+        //         vehicle.setName(rs.getString(2)); // getString takes columnIndex as paramter
+        //         vehicle.setType(rs.getString(3));
+
+        //         return vehicle; 
+
+        //     }
+        // };
+
+
+        // converting above code to lambda
+        return template.query(query, (rs, rowNum) -> {
+                Vehicle vehicle = new Vehicle();
                 vehicle.setId(rs.getInt(1)); // getInt takes columnIndex as paramter.
                 vehicle.setName(rs.getString(2)); // getString takes columnIndex as paramter
                 vehicle.setType(rs.getString(3));
-
                 return vehicle; 
-
-            }
-        };
+        });
         
+        // When lambda is not used
         //rowMapper tells query how to process data
-        List<Vehicle> vehicles = template.query(query, rowMapper);
+        // List<Vehicle> vehicles = template.query(query, rowMapper);
 
-        return vehicles;
+        // return vehicles;
     }
 
 }
