@@ -1,5 +1,6 @@
-CREATE TABLE vehicle {
-    id int,
-    vehicle_name varchar(20),
-    vehicle_type varchar(20)
-};
+
+CREATE TABLE vehicle ( 
+    id int primary key, 
+    name varchar(20), 
+    type varchar(20) 
+);

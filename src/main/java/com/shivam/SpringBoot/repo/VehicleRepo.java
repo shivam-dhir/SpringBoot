@@ -26,7 +26,7 @@ public class VehicleRepo {
      
     public void save(Vehicle vehicle){
         //template object is from JdbcTemplate package provided by spring.
-        String query = "insert into vehicle (id, vehicle_name, vehicle_type) values (?, ?, ?)"; 
+        String query = "insert into vehicle (id, name, type) values (?, ?, ?)"; 
         //similar to executeUpdate when using standard jdbc
         int rows = template.update(query, vehicle.getId(), vehicle.getName(), vehicle.getType());
     
