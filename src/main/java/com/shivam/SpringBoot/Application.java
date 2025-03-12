@@ -21,7 +21,7 @@ public class Application {
 		VehicleRepo repo = context.getBean(VehicleRepo.class);
 		repo.save(vehicle1);
 
-		repo.getAll();
+		System.out.println(repo.getAll());
 	}
 
 }
